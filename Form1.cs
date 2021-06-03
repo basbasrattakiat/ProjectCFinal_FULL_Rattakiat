@@ -84,10 +84,5 @@ namespace WinFormDB
                 newpasswordBox.PasswordChar = '•';
             }
         }
-
-        private void LOGIN_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
