@@ -277,9 +277,6 @@ namespace WinFormDB
                 , MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 
-        private void guna2PictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 }
