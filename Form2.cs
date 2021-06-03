@@ -349,10 +349,5 @@ namespace WinFormDB
             RESULT screen = new RESULT();
             screen.Show();
         }
-
-        private void guna2PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
