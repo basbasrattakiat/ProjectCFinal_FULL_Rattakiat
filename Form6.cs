@@ -162,10 +162,5 @@ namespace WinFormDB
             HOME screen = new HOME();
             screen.Show();
         }
-
-        private void guna2PictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
