@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,7 +57,7 @@ namespace WinFormDB
                     nameData.Rows.RemoveAt(nameData.Rows[0].Index);
                 }
             }
-            catch (Exception){}
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
         
         // ดึงข้อมูลรายละเอียดย่อย //
@@ -99,7 +99,7 @@ namespace WinFormDB
                         , MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }  
             }
-            catch {}
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         public ACT()
@@ -158,7 +158,7 @@ namespace WinFormDB
                         int rows1 = cmd1.ExecuteNonQuery();
                         conn1.Close();
                     }
-                    catch (Exception) { }
+                    catch {}
 
                     if (rows > 0)
                     {
@@ -172,7 +172,7 @@ namespace WinFormDB
                         idBox.Text = "-";
                     }
                 }
-                catch (Exception) { MessageBox.Show("กรุณากรอกข้อมูลทุกช่องให้ครบ ส่วนช่องจำนวน เเละราคาต่อหน่วย ให้กรอกเป็นตัวเลขเท่านั้น",
+                catch { MessageBox.Show("กรุณากรอกข้อมูลทุกช่องให้ครบ ส่วนช่องจำนวน เเละราคาต่อหน่วย ให้กรอกเป็นตัวเลขเท่านั้น",
                     "ACTIVITY", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }
             else { MessageBox.Show("กรุณากรอกข้อมูลให้ครบทุกช่อง แล้วกดบันทึกโครงการใหม่อีกครั้ง", 
@@ -207,7 +207,7 @@ namespace WinFormDB
                         resettext();
                     }
                 }
-                catch (Exception) { MessageBox.Show("มีรายละเอียดโครงการนี้ในฐานข้อมูลอยู่แล้ว", "ACTIVITY"
+                catch { MessageBox.Show("มีรายละเอียดโครงการนี้ในฐานข้อมูลอยู่แล้ว", "ACTIVITY"
                     , MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             }
             else { MessageBox.Show("กรุุณาเลือกรหัสกิจกรรม และลำดับที่ให้ครบ", "ACTIVITY"
@@ -276,7 +276,5 @@ namespace WinFormDB
             else { MessageBox.Show("กรุุณาเลือกรหัส และลำดับที่ให้ครบ", "ACTIVITY"
                 , MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
-
-    
     }
 }
