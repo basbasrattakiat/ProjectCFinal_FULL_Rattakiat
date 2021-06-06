@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,8 +18,6 @@ namespace WinFormDB
         MySqlCommand command;
         MySqlDataAdapter adapter;
 
-
-        public string user;
         public LOGIN()
         {
             InitializeComponent();
@@ -47,7 +45,7 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    user = Convert.ToString(table.Rows[0][2]);
+                    string user = Convert.ToString(table.Rows[0][2]);
                     MessageBox.Show("ยินดีต้อนรับ\n" + user + "\n" + DateTime.Now.ToLongDateString() + "  " + DateTime.Now.ToLongTimeString()
                         , "LOGIN", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Hide();
@@ -66,10 +64,10 @@ namespace WinFormDB
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show("เข้าสู่ระบบสำเร็จ");
+            MessageBox.Show("เข้าสู่ระบบสำเร็จ");
             this.Hide();
-            REG_RESET m = new REG_RESET();
-            m.Show();
+            REG_RESET screen = new REG_RESET();
+            screen.Show();
         }
 
         private void Switch1_CheckedChanged(object sender, EventArgs e)
