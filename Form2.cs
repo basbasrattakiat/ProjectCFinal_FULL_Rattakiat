@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +20,6 @@ namespace WinFormDB
         public string type4Total;
         public string type5Total;
         public string type6Total;
-        //public string nameStatus;
-        //public string logintime;
 
         MySqlCommand command;
         MySqlDataAdapter adapter;
@@ -46,19 +44,15 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                    int total = 0;
+                    for (int i = 0; i < table.Rows.Count; ++i)
                     {
-                        if (table.Rows.Count == 1) { type1Total = Convert.ToString(Convert.ToDouble(table.Rows[0][8])); }
-                        else if (table.Rows.Count > 1)
-                        {
-                            double total = Convert.ToDouble(table.Rows[i + 1][8]) + Convert.ToDouble(table.Rows[i][8]);
-                            type1Total = Convert.ToString(total);
-                        }
+                        total += Convert.ToInt32(table.Rows[i][8]);
                     }
+                    type1Total = Convert.ToString(total);
                 }
-                else { type1Total = Convert.ToString(0); }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void importType2()
@@ -75,19 +69,15 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                    int total = 0;
+                    for (int i = 0; i < table.Rows.Count; ++i)
                     {
-                        if (table.Rows.Count == 1) { type2Total = Convert.ToString(Convert.ToDouble(table.Rows[0][8])); }
-                        else if (table.Rows.Count > 1)
-                        {
-                            double total = Convert.ToDouble(table.Rows[i + 1][8]) + Convert.ToDouble(table.Rows[i][8]);
-                            type2Total = Convert.ToString(total);
-                        }
+                        total += Convert.ToInt32(table.Rows[i][8]);
                     }
+                    type2Total = Convert.ToString(total);
                 }
-                else { type2Total = Convert.ToString(0); }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void importType3()
@@ -104,19 +94,15 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                    int total = 0;
+                    for (int i = 0; i < table.Rows.Count; ++i)
                     {
-                        if (table.Rows.Count == 1) { type3Total = Convert.ToString(Convert.ToDouble(table.Rows[0][8])); }
-                        else if (table.Rows.Count > 1)
-                        {
-                            double total = Convert.ToDouble(table.Rows[i + 1][8]) + Convert.ToDouble(table.Rows[i][8]);
-                            type3Total = Convert.ToString(total);
-                        }
+                        total += Convert.ToInt32(table.Rows[i][8]);
                     }
+                    type3Total = Convert.ToString(total);
                 }
-                else { type3Total = Convert.ToString(0); }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void importType4()
@@ -133,19 +119,15 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                    int total = 0;
+                    for (int i = 0; i < table.Rows.Count; ++i)
                     {
-                        if (table.Rows.Count == 1) { type4Total = Convert.ToString(Convert.ToDouble(table.Rows[0][8])); }
-                        else if (table.Rows.Count > 1)
-                        {
-                            double total = Convert.ToDouble(table.Rows[i + 1][8]) + Convert.ToDouble(table.Rows[i][8]);
-                            type4Total = Convert.ToString(total);
-                        }
+                        total += Convert.ToInt32(table.Rows[i][8]);
                     }
+                    type4Total = Convert.ToString(total);
                 }
-                else { type4Total = Convert.ToString(0); }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void importType5()
@@ -162,19 +144,15 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                    int total = 0;
+                    for (int i = 0; i < table.Rows.Count; ++i)
                     {
-                        if (table.Rows.Count == 1) { type5Total = Convert.ToString(Convert.ToDouble(table.Rows[0][8])); }
-                        else if (table.Rows.Count > 1)
-                        {
-                            double total = Convert.ToDouble(table.Rows[i + 1][8]) + Convert.ToDouble(table.Rows[i][8]);
-                            type5Total = Convert.ToString(total);
-                        }
+                        total += Convert.ToInt32(table.Rows[i][8]);
                     }
+                    type5Total = Convert.ToString(total);
                 }
-                else { type5Total = Convert.ToString(0); }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void importType6()
@@ -191,19 +169,15 @@ namespace WinFormDB
 
                 if (table.Rows.Count > 0)
                 {
-                    for (int i = 0; i <= table.Rows.Count - 1; i++)
+                    int total = 0;
+                    for (int i = 0; i < table.Rows.Count; ++i)
                     {
-                        if (table.Rows.Count == 1) { type6Total = Convert.ToString(Convert.ToDouble(table.Rows[0][8])); }
-                        else if (table.Rows.Count > 1)
-                        {
-                            double total = Convert.ToDouble(table.Rows[i + 1][8]) + Convert.ToDouble(table.Rows[i][8]);
-                            type6Total = Convert.ToString(total);
-                        }
+                        total += Convert.ToInt32(table.Rows[i][8]);
                     }
+                    type6Total = Convert.ToString(total);
                 }
-                else { type6Total = Convert.ToString(0); }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         private void showChart()
@@ -232,10 +206,6 @@ namespace WinFormDB
 
                 newtotalText.Text = table.Rows[0][1].ToString();
                 newoutText.Text = Convert.ToString(monnyout);
-                if (Convert.ToInt32(Convert.ToInt32(table.Rows[0][1]) - monnyout) < 0)
-                {
-                    newinText.PlaceholderForeColor = Color.Red;
-                }
                 newinText.Text = Convert.ToString(Convert.ToInt32(table.Rows[0][1]) - monnyout);
             }
             catch (Exception e) { MessageBox.Show(e.Message); }
@@ -263,15 +233,13 @@ namespace WinFormDB
 
                     actData.Columns[2].HeaderText = "รวม";
                     actData.Columns[2].Width = 150;
-  
-                    //MessageBox.Show("พบข้อมูลโครงการ");
                 }
                 else
                 {
                     MessageBox.Show("ไม่พบข้อมูลโครงการ", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            catch (Exception) { }
+            catch (Exception e) { MessageBox.Show(e.Message); }
         }
 
         public HOME()
@@ -292,16 +260,11 @@ namespace WinFormDB
             showAct();
         }
 
-        private void savemonny_totalBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void saveactBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-            ACT m = new ACT();
-            m.ShowDialog();
+            ACT screen = new ACT();
+            screen.ShowDialog();
         }
 
         private void logout_Click(object sender, EventArgs e)
