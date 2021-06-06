@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,86 +31,145 @@ namespace WinFormDB
         {
             try
             {
-                string select = $"SELECT * FROM data WHERE id = \"{idBox.Text}\"";
-                MySqlConnection conn = databaseConnection();
-                DataSet dataset = new DataSet();
-
-                conn.Open();
-                MySqlCommand command;
-                command = conn.CreateCommand();
-                command.CommandText = select;
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                adapter.Fill(dataset);
-                conn.Close();
-
-                nameData.DataSource = dataset.Tables[0].DefaultView;
-                if (nameData.CurrentRow != null)
+                string select;
+                if (idBox.Text == "รวม")
                 {
-                    name.Text = nameData.Rows[0].Cells["name"].FormattedValue.ToString();
-                    nameData.Rows.RemoveAt(nameData.Rows[0].Index);
+                    name.Text = "รวมรายการทั้งหมด";
+                }
+                else
+                {
+                    select = $"SELECT * FROM data WHERE id = \"{idBox.Text}\"";
+                    MySqlConnection conn = databaseConnection();
+                    DataSet dataset = new DataSet();
+
+                    conn.Open();
+                    MySqlCommand command;
+                    command = conn.CreateCommand();
+                    command.CommandText = select;
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(dataset);
+                    conn.Close();
+
+                    nameData.DataSource = dataset.Tables[0].DefaultView;
+                    if (nameData.CurrentRow != null)
+                    {
+                        name.Text = nameData.Rows[0].Cells["name"].FormattedValue.ToString();
+                        nameData.Rows.RemoveAt(nameData.Rows[0].Index);
+                    }
                 }
             }
-            catch (Exception) { }
+            catch { }
         }
 
         private void showAct()
         {
             try
             {
-                string select = $"SELECT * FROM activity WHERE no = \"{idBox.Text}\"";
-                MySqlConnection conn = databaseConnection();
-                DataSet dataset = new DataSet();
-
-                conn.Open();
-                MySqlCommand command;
-                command = conn.CreateCommand();
-                command.CommandText = select;
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                adapter.Fill(dataset);
-                conn.Close();
-
-
-                totalBox.Text = "";
-                actData.DataSource = dataset.Tables[0].DefaultView;
-
-                if (actData.CurrentRow != null)
+                string select;
+                if (idBox.Text == "รวม")
                 {
-                    actData.Columns[0].HeaderText = "ข้อที่";
-                    actData.Columns[0].Width = 50;
-                    actData.Columns[1].Visible = false;
-                    actData.Columns[2].Visible = false;
-                    actData.Columns[3].HeaderText = "รายการ";
-                    actData.Columns[3].Width = 500;
-                    actData.Columns[4].HeaderText = "ประเภทตามรายจ่าย";
-                    actData.Columns[4].Width = 200;
-                    actData.Columns[5].HeaderText = "จำนวน";
-                    actData.Columns[5].Width = 80;
-                    actData.Columns[6].HeaderText = "หน่วยนับ";
-                    actData.Columns[6].Width = 80;
-                    actData.Columns[7].HeaderText = "ราคาต่อหน่วย";
-                    actData.Columns[7].Width = 100;
-                    actData.Columns[8].HeaderText = "รวม";
-                    actData.Columns[8].Width = 150;
+                    select = "SELECT * FROM activity";
+                    MySqlConnection conn2 = databaseConnection();
+                    DataSet dataset2 = new DataSet();
 
-                    int total = 0;
-                    for (int i = 0; i < actData.Rows.Count; ++i)
+                    conn2.Open();
+                    MySqlCommand command2;
+                    command2 = conn2.CreateCommand();
+                    command2.CommandText = select;
+
+                    MySqlDataAdapter adapter2 = new MySqlDataAdapter(command2);
+                    adapter2.Fill(dataset2);
+                    conn2.Close();
+
+                    totalBox.Text = "";
+                    actData.DataSource = dataset2.Tables[0].DefaultView;
+
+                    if (actData.CurrentRow != null)
                     {
-                        total += Convert.ToInt32(actData.Rows[i].Cells[8].Value);
+                        actData.Columns[0].HeaderText = "ข้อที่";
+                        actData.Columns[0].Width = 50;
+                        actData.Columns[1].Visible = false;
+                        actData.Columns[2].Visible = false;
+                        actData.Columns[3].HeaderText = "รายการ";
+                        actData.Columns[3].Width = 500;
+                        actData.Columns[4].HeaderText = "ประเภทตามรายจ่าย";
+                        actData.Columns[4].Width = 200;
+                        actData.Columns[5].HeaderText = "จำนวน";
+                        actData.Columns[5].Width = 80;
+                        actData.Columns[6].HeaderText = "หน่วยนับ";
+                        actData.Columns[6].Width = 80;
+                        actData.Columns[7].HeaderText = "ราคาต่อหน่วย";
+                        actData.Columns[7].Width = 100;
+                        actData.Columns[8].HeaderText = "รวม";
+                        actData.Columns[8].Width = 150;
+
+                        int total = 0;
+                        for (int i = 0; i < actData.Rows.Count; ++i)
+                        {
+                            total += Convert.ToInt32(actData.Rows[i].Cells[8].Value);
+                        }
+                        totalBox.Text = Convert.ToString(total);
+                        MessageBox.Show("พบข้อมูลโครงการ " + Convert.ToDouble(actData.Rows.Count) + " รายการ\nรวมทั้งสิ้น " + Convert.ToString(total) + " บาท"
+                            , "COUNT", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    totalBox.Text = Convert.ToString(total);
-                    MessageBox.Show("พบข้อมูลโครงการ " + Convert.ToDouble(actData.Rows.Count) + " รายการ\nรวมทั้งสิ้น " + Convert.ToString(total) + " บาท"
-                        , "COUNT", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
-                    string update1 = $"UPDATE data SET total = \"{totalBox.Text}\" WHERE id = \"{idBox.Text}\"";
-                    MySqlConnection conn1 = databaseConnection();
-                    String sql1 = update1;
-                    MySqlCommand command1 = new MySqlCommand(sql1, conn1);
+                if (idBox.Text != "รวม")
+                {
+                    select = $"SELECT * FROM activity WHERE no = \"{idBox.Text}\"";
+                    MySqlConnection conn = databaseConnection();
+                    DataSet dataset = new DataSet();
 
-                    conn1.Open();
-                    int rows1 = command1.ExecuteNonQuery();
-                    conn1.Close();
+                    conn.Open();
+                    MySqlCommand command;
+                    command = conn.CreateCommand();
+                    command.CommandText = select;
+
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(dataset);
+                    conn.Close();
+
+                    totalBox.Text = "";
+                    actData.DataSource = dataset.Tables[0].DefaultView;
+
+                    if (actData.CurrentRow != null)
+                    {
+                        actData.Columns[0].HeaderText = "ข้อที่";
+                        actData.Columns[0].Width = 50;
+                        actData.Columns[1].Visible = false;
+                        actData.Columns[2].Visible = false;
+                        actData.Columns[3].HeaderText = "รายการ";
+                        actData.Columns[3].Width = 500;
+                        actData.Columns[4].HeaderText = "ประเภทตามรายจ่าย";
+                        actData.Columns[4].Width = 200;
+                        actData.Columns[5].HeaderText = "จำนวน";
+                        actData.Columns[5].Width = 80;
+                        actData.Columns[6].HeaderText = "หน่วยนับ";
+                        actData.Columns[6].Width = 80;
+                        actData.Columns[7].HeaderText = "ราคาต่อหน่วย";
+                        actData.Columns[7].Width = 100;
+                        actData.Columns[8].HeaderText = "รวม";
+                        actData.Columns[8].Width = 150;
+
+                        int total = 0;
+                        for (int i = 0; i < actData.Rows.Count; ++i)
+                        {
+                            total += Convert.ToInt32(actData.Rows[i].Cells[8].Value);
+                        }
+                        totalBox.Text = Convert.ToString(total);
+                        MessageBox.Show("พบข้อมูลโครงการ " + Convert.ToDouble(actData.Rows.Count) + " รายการ\nรวมทั้งสิ้น " + Convert.ToString(total) + " บาท"
+                            , "COUNT", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        string update1 = $"UPDATE data SET total = \"{totalBox.Text}\" WHERE id = \"{idBox.Text}\"";
+                        MySqlConnection conn1 = databaseConnection();
+                        String sql1 = update1;
+                        MySqlCommand command1 = new MySqlCommand(sql1, conn1);
+
+                        conn1.Open();
+                        int rows1 = command1.ExecuteNonQuery();
+                        conn1.Close();
+                    }
                 }
             }
             catch { }
